@@ -1,7 +1,12 @@
 import { prisma } from "@/lib/db";
+import { ensureDatabaseReady } from "@/lib/database-bootstrap";
+import { seedInitialTrainingDataIfNeeded } from "@/lib/initial-training-seed";
 import { sanitizeLessonHtml } from "@/lib/sanitize-lesson-html";
 
 export async function getTrainingData() {
+  await ensureDatabaseReady();
+  await seedInitialTrainingDataIfNeeded(prisma);
+
   const [modules, lessons, quizzes] = await Promise.all([
     prisma.module.findMany({ orderBy: [{ orderNum: "asc" }, { id: "asc" }] }),
     prisma.lesson.findMany({ orderBy: [{ orderNum: "asc" }, { id: "asc" }] }),

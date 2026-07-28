@@ -2,7 +2,9 @@ import argon2 from "argon2";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createSession, sessionCookie } from "@/lib/auth";
+import { ensureDatabaseReady } from "@/lib/database-bootstrap";
 import { prisma } from "@/lib/db";
+import { seedInitialTrainingDataIfNeeded } from "@/lib/initial-training-seed";
 import { clearAccountLoginRateLimit, loginRateLimitStatus, recordFailedLogin } from "@/lib/login-rate-limit";
 
 const credentialsSchema = z.object({
@@ -59,6 +61,9 @@ export async function POST(request: Request) {
   }
 
   const username = parsed.data.username.toLowerCase();
+  await ensureDatabaseReady();
+  await seedInitialTrainingDataIfNeeded(prisma);
+
   const limit = await loginRateLimitStatus(request, username);
   if (limit.limited) {
     return NextResponse.json(
