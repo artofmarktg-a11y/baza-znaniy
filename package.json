@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "node scripts/ensure-prisma-runtime-dir.mjs && next build && node scripts/ensure-prisma-runtime-dir.mjs",
     "start": "next start",
-    "postinstall": "node scripts/ensure-prisma-runtime-dir.mjs",
     "lint": "eslint",
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
