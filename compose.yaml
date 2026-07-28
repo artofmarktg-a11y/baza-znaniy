@@ -1,0 +1,21 @@
+name: knowledge-base
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: knowledge-base-postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT}:5432"
+    volumes:
+      - knowledge-base-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  knowledge-base-postgres-data:

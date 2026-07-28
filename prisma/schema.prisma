@@ -1,0 +1,219 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  ROP
+  KNOWLEDGE_EDITOR
+  MANAGER
+}
+
+enum LessonType {
+  THEORY
+  PRACTICE
+  QUIZ
+}
+
+enum NotificationKind {
+  MODULE_COMPLETED
+}
+
+model User {
+  id           String           @id @default(cuid())
+  username     String           @unique
+  passwordHash String
+  lastName     String           @default("")
+  firstName    String           @default("")
+  middleName   String           @default("")
+  position     String           @default("")
+  phone        String           @default("")
+  email        String?          @unique
+  avatarData   String?          @db.Text
+  avatarMimeType String?
+  hasAvatar    Boolean          @default(false)
+  role         Role             @default(MANAGER)
+  isActive     Boolean          @default(true)
+  hireDate     DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  sessions     Session[]
+  lessonProgress LessonProgress[]
+  quizAttempts QuizAttempt[]
+  auditEvents  AuditEvent[]     @relation("AuditActor")
+  managerId     String?
+  manager       User?            @relation("DirectManager", fields: [managerId], references: [id], onDelete: SetNull)
+  directReports User[]           @relation("DirectManager")
+  notificationsReceived Notification[] @relation("NotificationRecipient")
+  notificationsCreated  Notification[] @relation("NotificationActor")
+
+  @@index([role, isActive])
+  @@index([managerId, isActive])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model LoginRateLimit {
+  key             String   @id
+  attempts        Int      @default(0)
+  windowStartedAt DateTime
+  blockedUntil    DateTime?
+  updatedAt       DateTime @updatedAt
+
+  @@index([updatedAt])
+}
+
+model Module {
+  id          Int      @id
+  orderNum    Int
+  title       String
+  description String    @default("")
+  icon        String    @default("book-open")
+  gradient    String    @default("135deg,#1e3a5f,#c93232")
+  isActive    Boolean   @default(true)
+  parentId    Int?
+  parent      Module?  @relation("ModuleTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Module[] @relation("ModuleTree")
+  lessons     Lesson[]
+  quiz        Quiz?
+  notifications Notification[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([parentId, orderNum])
+}
+
+model Lesson {
+  id          Int        @id
+  moduleId    Int
+  orderNum    Int
+  title       String
+  content     String     @db.Text
+  lessonType  LessonType @default(THEORY)
+  durationMin Int        @default(0)
+  module      Module     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progress    LessonProgress[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([moduleId, orderNum])
+}
+
+model Quiz {
+  id          Int             @id
+  moduleId    Int             @unique
+  title       String          @default("")
+  description String          @default("")
+  passScore   Int
+  maxAttempts Int?
+  module      Module          @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  questions   QuizQuestion[]
+  attempts    QuizAttempt[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model QuizQuestion {
+  id                 String       @id @default(cuid())
+  quizId             Int
+  position           Int
+  question           String       @db.Text
+  correctOptionIndex Int
+  quiz               Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  options            QuizOption[]
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@unique([quizId, position])
+}
+
+model QuizOption {
+  id         String       @id @default(cuid())
+  questionId String
+  position   Int
+  text       String       @db.Text
+  question   QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, position])
+}
+
+model LessonProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  lessonId    Int
+  completedAt DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId, completedAt])
+}
+
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      Int
+  answers     Json
+  score       Int
+  total       Int
+  passed      Boolean
+  completedAt DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([userId, quizId, completedAt])
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  recipientId String
+  actorId     String?
+  moduleId    Int?
+  kind        NotificationKind
+  dedupeKey   String           @unique
+  metadata    Json?
+  readAt      DateTime?
+  createdAt   DateTime         @default(now())
+  recipient   User             @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  actor       User?            @relation("NotificationActor", fields: [actorId], references: [id], onDelete: SetNull)
+  module      Module?          @relation(fields: [moduleId], references: [id], onDelete: SetNull)
+
+  @@index([recipientId, readAt, createdAt])
+}
+
+model AuditEvent {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  actor     User?    @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId, createdAt])
+}
+
+model RolePermission {
+  role       Role
+  permission String
+  allowed    Boolean  @default(false)
+  updatedAt  DateTime @updatedAt
+
+  @@id([role, permission])
+  @@index([permission, allowed])
+}
