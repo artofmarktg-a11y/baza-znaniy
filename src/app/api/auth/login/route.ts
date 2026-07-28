@@ -10,6 +10,47 @@ const credentialsSchema = z.object({
   password: z.string().min(1).max(256),
 });
 
+function isStrongBootstrapPassword(password: string | undefined) {
+  return Boolean(
+    password
+    && password.length >= 16
+    && /[a-z]/.test(password)
+    && /[A-Z]/.test(password)
+    && /\d/.test(password)
+    && /[^A-Za-z0-9]/.test(password),
+  );
+}
+
+async function createFirstAdminFromBootstrapCredentials(username: string, password: string) {
+  const bootstrapUsername = process.env.BOOTSTRAP_ADMIN_USERNAME?.trim().toLowerCase();
+  const bootstrapPassword = process.env.BOOTSTRAP_ADMIN_PASSWORD;
+  if (!bootstrapUsername || !isStrongBootstrapPassword(bootstrapPassword)) return null;
+  if (username !== bootstrapUsername || password !== bootstrapPassword) return null;
+
+  const existingAdmin = await prisma.user.findFirst({
+    where: { role: "ADMIN" },
+    select: { id: true },
+  });
+  if (existingAdmin) return null;
+
+  const passwordHash = await argon2.hash(password, { type: argon2.argon2id });
+  return prisma.user.upsert({
+    where: { username },
+    update: {
+      passwordHash,
+      role: "ADMIN",
+      isActive: true,
+    },
+    create: {
+      username,
+      passwordHash,
+      role: "ADMIN",
+      firstName: "Administrator",
+      isActive: true,
+    },
+  });
+}
+
 export async function POST(request: Request) {
   const payload = await request.json().catch(() => null);
   const parsed = credentialsSchema.safeParse(payload);
@@ -29,8 +70,10 @@ export async function POST(request: Request) {
   const user = await prisma.user.findUnique({
     where: { username },
   });
-  const valid = user?.isActive ? await argon2.verify(user.passwordHash, parsed.data.password) : false;
-  if (!user || !valid) {
+  const bootstrapUser = user ? null : await createFirstAdminFromBootstrapCredentials(username, parsed.data.password);
+  const loginUser = user || bootstrapUser;
+  const valid = loginUser?.isActive ? bootstrapUser ? true : await argon2.verify(loginUser.passwordHash, parsed.data.password) : false;
+  if (!loginUser || !valid) {
     const failure = await recordFailedLogin(request, username);
     if (failure.limited) {
       return NextResponse.json(
@@ -42,7 +85,7 @@ export async function POST(request: Request) {
   }
 
   await clearAccountLoginRateLimit(request, username);
-  const session = await createSession(user.id);
+  const session = await createSession(loginUser.id);
   const response = NextResponse.json({ ok: true });
   response.cookies.set(sessionCookie(session.token, session.expiresAt));
   return response;
