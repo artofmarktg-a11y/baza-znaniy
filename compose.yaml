@@ -1,14 +1,34 @@
 name: knowledge-base
 
 services:
+  baza-znaniy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: baza-znaniy
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+      DATABASE_URL: postgresql://${POSTGRES_USER:-knowledge_app}:${POSTGRES_PASSWORD:-change-this-password}@postgres:5432/${POSTGRES_DB:-knowledge_base}?schema=public
+      CONFIRM_DATABASE_SEED: ${CONFIRM_DATABASE_SEED:-}
+      BOOTSTRAP_ADMIN_USERNAME: ${BOOTSTRAP_ADMIN_USERNAME:-admin}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+
   postgres:
     image: postgres:17-alpine
     container_name: knowledge-base-postgres
     restart: unless-stopped
-    env_file:
-      - .env
-    ports:
-      - "127.0.0.1:${POSTGRES_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-knowledge_base}
+      POSTGRES_USER: ${POSTGRES_USER:-knowledge_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-this-password}
     volumes:
       - knowledge-base-postgres-data:/var/lib/postgresql/data
     healthcheck:
