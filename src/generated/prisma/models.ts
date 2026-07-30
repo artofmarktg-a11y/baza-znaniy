@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/UserTrainingAccess'
 export type * from './models/Session'
 export type * from './models/LoginRateLimit'
 export type * from './models/Module'
@@ -19,6 +20,7 @@ export type * from './models/QuizOption'
 export type * from './models/LessonProgress'
 export type * from './models/QuizAttempt'
 export type * from './models/Notification'
+export type * from './models/TrainingAssignment'
 export type * from './models/AuditEvent'
 export type * from './models/RolePermission'
 export type * from './commonInputTypes'

@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  UserTrainingAccess: 'UserTrainingAccess',
   Session: 'Session',
   LoginRateLimit: 'LoginRateLimit',
   Module: 'Module',
@@ -62,6 +63,7 @@ export const ModelName = {
   LessonProgress: 'LessonProgress',
   QuizAttempt: 'QuizAttempt',
   Notification: 'Notification',
+  TrainingAssignment: 'TrainingAssignment',
   AuditEvent: 'AuditEvent',
   RolePermission: 'RolePermission'
 } as const
@@ -98,12 +100,30 @@ export const UserScalarFieldEnum = {
   role: 'role',
   isActive: 'isActive',
   hireDate: 'hireDate',
+  trainingDueDate: 'trainingDueDate',
+  lastReminderAt: 'lastReminderAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   managerId: 'managerId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserTrainingAccessScalarFieldEnum = {
+  userId: 'userId',
+  method: 'method',
+  state: 'state',
+  trialModuleId: 'trialModuleId',
+  reviewRequestedAt: 'reviewRequestedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  decisionComment: 'decisionComment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserTrainingAccessScalarFieldEnum = (typeof UserTrainingAccessScalarFieldEnum)[keyof typeof UserTrainingAccessScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -233,6 +253,21 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const TrainingAssignmentScalarFieldEnum = {
+  id: 'id',
+  moduleId: 'moduleId',
+  employeeId: 'employeeId',
+  assignedById: 'assignedById',
+  dueDate: 'dueDate',
+  isRequired: 'isRequired',
+  lastReminderAt: 'lastReminderAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrainingAssignmentScalarFieldEnum = (typeof TrainingAssignmentScalarFieldEnum)[keyof typeof TrainingAssignmentScalarFieldEnum]
 
 
 export const AuditEventScalarFieldEnum = {

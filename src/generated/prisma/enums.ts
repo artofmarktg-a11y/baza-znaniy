@@ -29,7 +29,30 @@ export type LessonType = (typeof LessonType)[keyof typeof LessonType]
 
 
 export const NotificationKind = {
-  MODULE_COMPLETED: 'MODULE_COMPLETED'
+  MODULE_COMPLETED: 'MODULE_COMPLETED',
+  TRAINING_REMINDER: 'TRAINING_REMINDER',
+  TRAINING_ASSIGNMENT: 'TRAINING_ASSIGNMENT',
+  TRAINEE_REVIEW_REQUIRED: 'TRAINEE_REVIEW_REQUIRED',
+  TRAINING_ACCESS_GRANTED: 'TRAINING_ACCESS_GRANTED',
+  TRAINING_ACCESS_COMPLETED: 'TRAINING_ACCESS_COMPLETED'
 } as const
 
 export type NotificationKind = (typeof NotificationKind)[keyof typeof NotificationKind]
+
+
+export const TrainingAccessState = {
+  TRAINEE: 'TRAINEE',
+  REVIEW_REQUIRED: 'REVIEW_REQUIRED',
+  FULL_ACCESS: 'FULL_ACCESS',
+  TRAINING_COMPLETED: 'TRAINING_COMPLETED'
+} as const
+
+export type TrainingAccessState = (typeof TrainingAccessState)[keyof typeof TrainingAccessState]
+
+
+export const TrainingMethod = {
+  EXPRESS_TRAINING: 'EXPRESS_TRAINING',
+  MAIN_PROGRAM: 'MAIN_PROGRAM'
+} as const
+
+export type TrainingMethod = (typeof TrainingMethod)[keyof typeof TrainingMethod]

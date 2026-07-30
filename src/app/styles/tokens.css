@@ -1,0 +1,93 @@
+/* Canonical design tokens. No screen-level values belong in this file. */
+:root {
+  --font: Inter, Arial, Helvetica, sans-serif;
+  --font-ui: var(--font-geist-sans), Geist, Arial, sans-serif;
+
+  --page: #f5f7fa;
+  --surface: #ffffff;
+  --ink: #17202d;
+  --muted: #667085;
+  --line: #e5eaf0;
+  --border: #e5e7eb;
+
+  --i0: #0f172a;
+  --i1: #1f2937;
+  --i2: #374151;
+  --i3: #4b5563;
+  --i4: #64748b;
+  --i5: #94a3b8;
+  --i6: #cbd5e1;
+  --i7: #e2e8f0;
+  --i8: #f1f5f9;
+  --i9: #f8fafc;
+
+  --navy: #173a5e;
+  --navy-strong: #102d4a;
+  --navy-soft: #edf3f8;
+  --n700: #1e3a5f;
+  --n800: #172d49;
+  --n900: #0d1b2e;
+  --red: #bf3038;
+  --cr: #a92828;
+  --cr-h: #c93232;
+  --cr-l: #fff1f1;
+  --cr-b: #f3c1c1;
+  --success: #1d7a4f;
+  --warning: #a86611;
+  --g1: #ecfdf5;
+  --g6: #16a34a;
+  --gb: #bbf7d0;
+  --b1: #eff6ff;
+  --b6: #2563eb;
+  --bb: #bfdbfe;
+  --y1: #fffbeb;
+  --y6: #b45309;
+  --yb: #fde68a;
+
+  --radius-control: 8px;
+  --radius-panel: 14px;
+  --r4: 8px;
+  --r5: 10px;
+  --r6: 12px;
+  --s1: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --s2: 0 8px 22px rgba(15, 23, 42, 0.06);
+  --s4: 0 16px 34px rgba(15, 23, 42, 0.11);
+  --shadow-panel: 0 12px 32px rgba(23, 58, 94, 0.06);
+
+  --header-action-height: 40px;
+  --control-rail-height: 44px;
+  --control-compact-height: 36px;
+  --control-touch-height: 44px;
+  --control-padding-inline: 13px;
+  --workspace-content-max: 1320px;
+  --focus-ring: #0b69a3;
+  --focus-ring-inner: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html,
+body { min-height: 100%; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+
+a { color: inherit; }
+
+svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
+button,
+input,
+select,
+textarea { font-family: inherit; }

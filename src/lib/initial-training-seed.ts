@@ -1,5 +1,6 @@
 import trainingData from "@/data/training-data.json";
 import type { PrismaClient } from "@/generated/prisma/client";
+import { improveModuleTwoLessonContent } from "@/lib/module-two-content";
 
 type SourceModule = (typeof trainingData.modules)[number];
 type SourceLesson = (typeof trainingData.lessons)[number];
@@ -47,6 +48,7 @@ async function seedModules(prisma: PrismaClient, modules: SourceModule[]) {
 
 async function seedLessons(prisma: PrismaClient, lessons: SourceLesson[]) {
   for (const lesson of lessons) {
+    const content = improveModuleTwoLessonContent(lesson.id, lesson.content);
     await prisma.lesson.upsert({
       where: { id: lesson.id },
       create: {
@@ -54,7 +56,7 @@ async function seedLessons(prisma: PrismaClient, lessons: SourceLesson[]) {
         moduleId: lesson.module_id,
         orderNum: lesson.order_num,
         title: lesson.title,
-        content: lesson.content,
+        content,
         lessonType: lessonType(lesson.lesson_type),
         durationMin: lesson.duration_min,
       },
@@ -62,7 +64,7 @@ async function seedLessons(prisma: PrismaClient, lessons: SourceLesson[]) {
         moduleId: lesson.module_id,
         orderNum: lesson.order_num,
         title: lesson.title,
-        content: lesson.content,
+        content,
         lessonType: lessonType(lesson.lesson_type),
         durationMin: lesson.duration_min,
       },
@@ -119,8 +121,8 @@ async function seedQuizzes(prisma: PrismaClient, quizzes: SourceQuiz[]) {
 
 async function seedPermissions(prisma: PrismaClient) {
   const permissionDefaults = {
-    ADMIN: ["training", "knowledge_manage", "team_progress_view", "employees_view", "employees_manage", "access_manage"],
-    ROP: ["training", "team_progress_view"],
+    ADMIN: ["training", "knowledge_manage", "team_progress_view", "training_completion_manage", "employees_view", "employees_manage", "access_manage"],
+    ROP: ["training", "team_progress_view", "training_completion_manage"],
     KNOWLEDGE_EDITOR: ["training", "knowledge_manage", "employees_view"],
     MANAGER: ["training"],
   } as const;

@@ -1,8 +1,8 @@
 import sanitizeHtml from "sanitize-html";
 
 const allowedTags = [
-  "a", "br", "code", "div", "em", "h2", "h3", "img", "li", "ol", "p", "section", "small", "span", "strong", "table", "tbody", "td", "th", "thead", "tr", "ul",
-  "svg", "defs", "lineargradient", "stop", "g", "circle", "line", "path", "polygon", "polyline", "rect", "text",
+  "a", "aside", "audio", "blockquote", "br", "code", "col", "colgroup", "div", "em", "figure", "figcaption", "h2", "h3", "h4", "hr", "iframe", "img", "li", "ol", "p", "section", "small", "source", "span", "strong", "table", "tbody", "td", "th", "thead", "tr", "u", "ul", "video",
+  "svg", "defs", "lineargradient", "stop", "g", "circle", "clippath", "line", "path", "polygon", "polyline", "rect", "text",
 ];
 
 export function sanitizeLessonHtml(html: string) {
@@ -11,9 +11,13 @@ export function sanitizeLessonHtml(html: string) {
     allowedAttributes: {
       "*": ["class", "style", "title"],
       a: ["href", "target", "rel"],
+      audio: ["controls", "preload", "src"],
+      iframe: ["src", "width", "height", "allow", "allowfullscreen", "frameborder", "scrolling", "sandbox"],
       img: ["src", "alt", "width", "height"],
+      source: ["src", "type"],
       td: ["colspan", "rowspan"],
       th: ["colspan", "rowspan"],
+      video: ["controls", "src", "width", "height", "poster"],
       svg: ["viewbox", "width", "height", "xmlns", "fill", "stroke"],
       lineargradient: ["id", "x1", "x2", "y1", "y2"],
       stop: ["offset", "stop-color", "stop-opacity"],
@@ -33,6 +37,10 @@ export function sanitizeLessonHtml(html: string) {
         attribs: attribs.target === "_blank"
           ? { ...attribs, rel: "noopener noreferrer" }
           : attribs,
+      }),
+      audio: (tagName, attribs) => ({
+        tagName,
+        attribs: { ...attribs, controls: "controls", preload: attribs.preload || "metadata" },
       }),
     },
   });

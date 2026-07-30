@@ -40,6 +40,8 @@ export type UserMinAggregateOutputType = {
   role: $Enums.Role | null
   isActive: boolean | null
   hireDate: Date | null
+  trainingDueDate: Date | null
+  lastReminderAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   managerId: string | null
@@ -61,6 +63,8 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.Role | null
   isActive: boolean | null
   hireDate: Date | null
+  trainingDueDate: Date | null
+  lastReminderAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   managerId: string | null
@@ -82,6 +86,8 @@ export type UserCountAggregateOutputType = {
   role: number
   isActive: number
   hireDate: number
+  trainingDueDate: number
+  lastReminderAt: number
   createdAt: number
   updatedAt: number
   managerId: number
@@ -105,6 +111,8 @@ export type UserMinAggregateInputType = {
   role?: true
   isActive?: true
   hireDate?: true
+  trainingDueDate?: true
+  lastReminderAt?: true
   createdAt?: true
   updatedAt?: true
   managerId?: true
@@ -126,6 +134,8 @@ export type UserMaxAggregateInputType = {
   role?: true
   isActive?: true
   hireDate?: true
+  trainingDueDate?: true
+  lastReminderAt?: true
   createdAt?: true
   updatedAt?: true
   managerId?: true
@@ -147,6 +157,8 @@ export type UserCountAggregateInputType = {
   role?: true
   isActive?: true
   hireDate?: true
+  trainingDueDate?: true
+  lastReminderAt?: true
   createdAt?: true
   updatedAt?: true
   managerId?: true
@@ -241,6 +253,8 @@ export type UserGroupByOutputType = {
   role: $Enums.Role
   isActive: boolean
   hireDate: Date | null
+  trainingDueDate: Date | null
+  lastReminderAt: Date | null
   createdAt: Date
   updatedAt: Date
   managerId: string | null
@@ -283,6 +297,8 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolFilter<"User"> | boolean
   hireDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  trainingDueDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastReminderAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   managerId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -294,6 +310,9 @@ export type UserWhereInput = {
   directReports?: Prisma.UserListRelationFilter
   notificationsReceived?: Prisma.NotificationListRelationFilter
   notificationsCreated?: Prisma.NotificationListRelationFilter
+  trainingAssignments?: Prisma.TrainingAssignmentListRelationFilter
+  assignmentsCreated?: Prisma.TrainingAssignmentListRelationFilter
+  trainingAccess?: Prisma.XOR<Prisma.UserTrainingAccessNullableScalarRelationFilter, Prisma.UserTrainingAccessWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -312,6 +331,8 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   hireDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  trainingDueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastReminderAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   managerId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -323,6 +344,9 @@ export type UserOrderByWithRelationInput = {
   directReports?: Prisma.UserOrderByRelationAggregateInput
   notificationsReceived?: Prisma.NotificationOrderByRelationAggregateInput
   notificationsCreated?: Prisma.NotificationOrderByRelationAggregateInput
+  trainingAssignments?: Prisma.TrainingAssignmentOrderByRelationAggregateInput
+  assignmentsCreated?: Prisma.TrainingAssignmentOrderByRelationAggregateInput
+  trainingAccess?: Prisma.UserTrainingAccessOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -344,6 +368,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolFilter<"User"> | boolean
   hireDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  trainingDueDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastReminderAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   managerId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -355,6 +381,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   directReports?: Prisma.UserListRelationFilter
   notificationsReceived?: Prisma.NotificationListRelationFilter
   notificationsCreated?: Prisma.NotificationListRelationFilter
+  trainingAssignments?: Prisma.TrainingAssignmentListRelationFilter
+  assignmentsCreated?: Prisma.TrainingAssignmentListRelationFilter
+  trainingAccess?: Prisma.XOR<Prisma.UserTrainingAccessNullableScalarRelationFilter, Prisma.UserTrainingAccessWhereInput> | null
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -373,6 +402,8 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   hireDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  trainingDueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastReminderAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   managerId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -400,6 +431,8 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   hireDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  trainingDueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  lastReminderAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   managerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -421,6 +454,8 @@ export type UserCreateInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -431,6 +466,9 @@ export type UserCreateInput = {
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -449,6 +487,8 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -459,6 +499,9 @@ export type UserUncheckedCreateInput = {
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -477,6 +520,8 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -487,6 +532,9 @@ export type UserUpdateInput = {
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -505,6 +553,8 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -515,6 +565,9 @@ export type UserUncheckedUpdateInput = {
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -533,6 +586,8 @@ export type UserCreateManyInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -554,6 +609,8 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -574,6 +631,8 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -610,6 +669,8 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   hireDate?: Prisma.SortOrder
+  trainingDueDate?: Prisma.SortOrder
+  lastReminderAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   managerId?: Prisma.SortOrder
@@ -631,6 +692,8 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   hireDate?: Prisma.SortOrder
+  trainingDueDate?: Prisma.SortOrder
+  lastReminderAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   managerId?: Prisma.SortOrder
@@ -652,6 +715,8 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   hireDate?: Prisma.SortOrder
+  trainingDueDate?: Prisma.SortOrder
+  lastReminderAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   managerId?: Prisma.SortOrder
@@ -744,6 +809,20 @@ export type UserUncheckedUpdateManyWithoutManagerNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedOneWithoutTrainingAccessInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrainingAccessInput, Prisma.UserUncheckedCreateWithoutTrainingAccessInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrainingAccessInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTrainingAccessNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrainingAccessInput, Prisma.UserUncheckedCreateWithoutTrainingAccessInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrainingAccessInput
+  upsert?: Prisma.UserUpsertWithoutTrainingAccessInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrainingAccessInput, Prisma.UserUpdateWithoutTrainingAccessInput>, Prisma.UserUncheckedUpdateWithoutTrainingAccessInput>
+}
+
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -816,6 +895,36 @@ export type UserUpdateOneWithoutNotificationsCreatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsCreatedInput, Prisma.UserUpdateWithoutNotificationsCreatedInput>, Prisma.UserUncheckedUpdateWithoutNotificationsCreatedInput>
 }
 
+export type UserCreateNestedOneWithoutTrainingAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrainingAssignmentsInput, Prisma.UserUncheckedCreateWithoutTrainingAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrainingAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutAssignmentsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignmentsCreatedInput, Prisma.UserUncheckedCreateWithoutAssignmentsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignmentsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTrainingAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrainingAssignmentsInput, Prisma.UserUncheckedCreateWithoutTrainingAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrainingAssignmentsInput
+  upsert?: Prisma.UserUpsertWithoutTrainingAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrainingAssignmentsInput, Prisma.UserUpdateWithoutTrainingAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutTrainingAssignmentsInput>
+}
+
+export type UserUpdateOneWithoutAssignmentsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignmentsCreatedInput, Prisma.UserUncheckedCreateWithoutAssignmentsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignmentsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutAssignmentsCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignmentsCreatedInput, Prisma.UserUpdateWithoutAssignmentsCreatedInput>, Prisma.UserUncheckedUpdateWithoutAssignmentsCreatedInput>
+}
+
 export type UserCreateNestedOneWithoutAuditEventsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuditEventsInput, Prisma.UserUncheckedCreateWithoutAuditEventsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditEventsInput
@@ -848,6 +957,8 @@ export type UserCreateWithoutDirectReportsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -857,6 +968,9 @@ export type UserCreateWithoutDirectReportsInput = {
   manager?: Prisma.UserCreateNestedOneWithoutDirectReportsInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDirectReportsInput = {
@@ -875,6 +989,8 @@ export type UserUncheckedCreateWithoutDirectReportsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -884,6 +1000,9 @@ export type UserUncheckedCreateWithoutDirectReportsInput = {
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDirectReportsInput = {
@@ -907,6 +1026,8 @@ export type UserCreateWithoutManagerInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -916,6 +1037,9 @@ export type UserCreateWithoutManagerInput = {
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutManagerInput = {
@@ -934,6 +1058,8 @@ export type UserUncheckedCreateWithoutManagerInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -943,6 +1069,9 @@ export type UserUncheckedCreateWithoutManagerInput = {
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutManagerInput = {
@@ -982,6 +1111,8 @@ export type UserUpdateWithoutDirectReportsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -991,6 +1122,9 @@ export type UserUpdateWithoutDirectReportsInput = {
   manager?: Prisma.UserUpdateOneWithoutDirectReportsNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDirectReportsInput = {
@@ -1009,6 +1143,8 @@ export type UserUncheckedUpdateWithoutDirectReportsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1018,6 +1154,9 @@ export type UserUncheckedUpdateWithoutDirectReportsInput = {
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutManagerInput = {
@@ -1055,9 +1194,155 @@ export type UserScalarWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolFilter<"User"> | boolean
   hireDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  trainingDueDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastReminderAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   managerId?: Prisma.StringNullableFilter<"User"> | string | null
+}
+
+export type UserCreateWithoutTrainingAccessInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
+  position?: string
+  phone?: string
+  email?: string | null
+  avatarData?: string | null
+  avatarMimeType?: string | null
+  hasAvatar?: boolean
+  role?: $Enums.Role
+  isActive?: boolean
+  hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  manager?: Prisma.UserCreateNestedOneWithoutDirectReportsInput
+  directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+}
+
+export type UserUncheckedCreateWithoutTrainingAccessInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
+  position?: string
+  phone?: string
+  email?: string | null
+  avatarData?: string | null
+  avatarMimeType?: string | null
+  hasAvatar?: boolean
+  role?: $Enums.Role
+  isActive?: boolean
+  hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  managerId?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+}
+
+export type UserCreateOrConnectWithoutTrainingAccessInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrainingAccessInput, Prisma.UserUncheckedCreateWithoutTrainingAccessInput>
+}
+
+export type UserUpsertWithoutTrainingAccessInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTrainingAccessInput, Prisma.UserUncheckedUpdateWithoutTrainingAccessInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrainingAccessInput, Prisma.UserUncheckedCreateWithoutTrainingAccessInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTrainingAccessInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTrainingAccessInput, Prisma.UserUncheckedUpdateWithoutTrainingAccessInput>
+}
+
+export type UserUpdateWithoutTrainingAccessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasAvatar?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  manager?: Prisma.UserUpdateOneWithoutDirectReportsNestedInput
+  directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTrainingAccessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasAvatar?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1076,6 +1361,8 @@ export type UserCreateWithoutSessionsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
@@ -1085,6 +1372,9 @@ export type UserCreateWithoutSessionsInput = {
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1103,6 +1393,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -1112,6 +1404,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1146,6 +1441,8 @@ export type UserUpdateWithoutSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
@@ -1155,6 +1452,9 @@ export type UserUpdateWithoutSessionsInput = {
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1173,6 +1473,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1182,6 +1484,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLessonProgressInput = {
@@ -1200,6 +1505,8 @@ export type UserCreateWithoutLessonProgressInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1209,6 +1516,9 @@ export type UserCreateWithoutLessonProgressInput = {
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLessonProgressInput = {
@@ -1227,6 +1537,8 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -1236,6 +1548,9 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLessonProgressInput = {
@@ -1270,6 +1585,8 @@ export type UserUpdateWithoutLessonProgressInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1279,6 +1596,9 @@ export type UserUpdateWithoutLessonProgressInput = {
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLessonProgressInput = {
@@ -1297,6 +1617,8 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1306,6 +1628,9 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuizAttemptsInput = {
@@ -1324,6 +1649,8 @@ export type UserCreateWithoutQuizAttemptsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1333,6 +1660,9 @@ export type UserCreateWithoutQuizAttemptsInput = {
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -1351,6 +1681,8 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -1360,6 +1692,9 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -1394,6 +1729,8 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1403,6 +1740,9 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -1421,6 +1761,8 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1430,6 +1772,9 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsReceivedInput = {
@@ -1448,6 +1793,8 @@ export type UserCreateWithoutNotificationsReceivedInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1457,6 +1804,9 @@ export type UserCreateWithoutNotificationsReceivedInput = {
   manager?: Prisma.UserCreateNestedOneWithoutDirectReportsInput
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
@@ -1475,6 +1825,8 @@ export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -1484,6 +1836,9 @@ export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -1507,6 +1862,8 @@ export type UserCreateWithoutNotificationsCreatedInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1516,6 +1873,9 @@ export type UserCreateWithoutNotificationsCreatedInput = {
   manager?: Prisma.UserCreateNestedOneWithoutDirectReportsInput
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsCreatedInput = {
@@ -1534,6 +1894,8 @@ export type UserUncheckedCreateWithoutNotificationsCreatedInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -1543,6 +1905,9 @@ export type UserUncheckedCreateWithoutNotificationsCreatedInput = {
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsCreatedInput = {
@@ -1577,6 +1942,8 @@ export type UserUpdateWithoutNotificationsReceivedInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1586,6 +1953,9 @@ export type UserUpdateWithoutNotificationsReceivedInput = {
   manager?: Prisma.UserUpdateOneWithoutDirectReportsNestedInput
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
@@ -1604,6 +1974,8 @@ export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1613,6 +1985,9 @@ export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutNotificationsCreatedInput = {
@@ -1642,6 +2017,8 @@ export type UserUpdateWithoutNotificationsCreatedInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1651,6 +2028,9 @@ export type UserUpdateWithoutNotificationsCreatedInput = {
   manager?: Prisma.UserUpdateOneWithoutDirectReportsNestedInput
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsCreatedInput = {
@@ -1669,6 +2049,8 @@ export type UserUncheckedUpdateWithoutNotificationsCreatedInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1678,6 +2060,297 @@ export type UserUncheckedUpdateWithoutNotificationsCreatedInput = {
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutTrainingAssignmentsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
+  position?: string
+  phone?: string
+  email?: string | null
+  avatarData?: string | null
+  avatarMimeType?: string | null
+  hasAvatar?: boolean
+  role?: $Enums.Role
+  isActive?: boolean
+  hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  manager?: Prisma.UserCreateNestedOneWithoutDirectReportsInput
+  directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutTrainingAssignmentsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
+  position?: string
+  phone?: string
+  email?: string | null
+  avatarData?: string | null
+  avatarMimeType?: string | null
+  hasAvatar?: boolean
+  role?: $Enums.Role
+  isActive?: boolean
+  hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  managerId?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTrainingAssignmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrainingAssignmentsInput, Prisma.UserUncheckedCreateWithoutTrainingAssignmentsInput>
+}
+
+export type UserCreateWithoutAssignmentsCreatedInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
+  position?: string
+  phone?: string
+  email?: string | null
+  avatarData?: string | null
+  avatarMimeType?: string | null
+  hasAvatar?: boolean
+  role?: $Enums.Role
+  isActive?: boolean
+  hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  manager?: Prisma.UserCreateNestedOneWithoutDirectReportsInput
+  directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAssignmentsCreatedInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
+  position?: string
+  phone?: string
+  email?: string | null
+  avatarData?: string | null
+  avatarMimeType?: string | null
+  hasAvatar?: boolean
+  role?: $Enums.Role
+  isActive?: boolean
+  hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  managerId?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAssignmentsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignmentsCreatedInput, Prisma.UserUncheckedCreateWithoutAssignmentsCreatedInput>
+}
+
+export type UserUpsertWithoutTrainingAssignmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTrainingAssignmentsInput, Prisma.UserUncheckedUpdateWithoutTrainingAssignmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrainingAssignmentsInput, Prisma.UserUncheckedCreateWithoutTrainingAssignmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTrainingAssignmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTrainingAssignmentsInput, Prisma.UserUncheckedUpdateWithoutTrainingAssignmentsInput>
+}
+
+export type UserUpdateWithoutTrainingAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasAvatar?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  manager?: Prisma.UserUpdateOneWithoutDirectReportsNestedInput
+  directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTrainingAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasAvatar?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutAssignmentsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignmentsCreatedInput, Prisma.UserUncheckedUpdateWithoutAssignmentsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignmentsCreatedInput, Prisma.UserUncheckedCreateWithoutAssignmentsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssignmentsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignmentsCreatedInput, Prisma.UserUncheckedUpdateWithoutAssignmentsCreatedInput>
+}
+
+export type UserUpdateWithoutAssignmentsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasAvatar?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  manager?: Prisma.UserUpdateOneWithoutDirectReportsNestedInput
+  directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssignmentsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasAvatar?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditEventsInput = {
@@ -1696,6 +2369,8 @@ export type UserCreateWithoutAuditEventsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1705,6 +2380,9 @@ export type UserCreateWithoutAuditEventsInput = {
   directReports?: Prisma.UserCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditEventsInput = {
@@ -1723,6 +2401,8 @@ export type UserUncheckedCreateWithoutAuditEventsInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   managerId?: string | null
@@ -1732,6 +2412,9 @@ export type UserUncheckedCreateWithoutAuditEventsInput = {
   directReports?: Prisma.UserUncheckedCreateNestedManyWithoutManagerInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsCreated?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutEmployeeInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditEventsInput = {
@@ -1766,6 +2449,8 @@ export type UserUpdateWithoutAuditEventsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1775,6 +2460,9 @@ export type UserUpdateWithoutAuditEventsInput = {
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditEventsInput = {
@@ -1793,6 +2481,8 @@ export type UserUncheckedUpdateWithoutAuditEventsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1802,6 +2492,9 @@ export type UserUncheckedUpdateWithoutAuditEventsInput = {
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyManagerInput = {
@@ -1820,6 +2513,8 @@ export type UserCreateManyManagerInput = {
   role?: $Enums.Role
   isActive?: boolean
   hireDate?: Date | string | null
+  trainingDueDate?: Date | string | null
+  lastReminderAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1840,6 +2535,8 @@ export type UserUpdateWithoutManagerInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1849,6 +2546,9 @@ export type UserUpdateWithoutManagerInput = {
   directReports?: Prisma.UserUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutManagerInput = {
@@ -1867,6 +2567,8 @@ export type UserUncheckedUpdateWithoutManagerInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1876,6 +2578,9 @@ export type UserUncheckedUpdateWithoutManagerInput = {
   directReports?: Prisma.UserUncheckedUpdateManyWithoutManagerNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsCreated?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutEmployeeNestedInput
+  assignmentsCreated?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  trainingAccess?: Prisma.UserTrainingAccessUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutManagerInput = {
@@ -1894,6 +2599,8 @@ export type UserUncheckedUpdateManyWithoutManagerInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hireDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trainingDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastReminderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1911,6 +2618,8 @@ export type UserCountOutputType = {
   directReports: number
   notificationsReceived: number
   notificationsCreated: number
+  trainingAssignments: number
+  assignmentsCreated: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1921,6 +2630,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   directReports?: boolean | UserCountOutputTypeCountDirectReportsArgs
   notificationsReceived?: boolean | UserCountOutputTypeCountNotificationsReceivedArgs
   notificationsCreated?: boolean | UserCountOutputTypeCountNotificationsCreatedArgs
+  trainingAssignments?: boolean | UserCountOutputTypeCountTrainingAssignmentsArgs
+  assignmentsCreated?: boolean | UserCountOutputTypeCountAssignmentsCreatedArgs
 }
 
 /**
@@ -1982,6 +2693,20 @@ export type UserCountOutputTypeCountNotificationsCreatedArgs<ExtArgs extends run
   where?: Prisma.NotificationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTrainingAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrainingAssignmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssignmentsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrainingAssignmentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1999,6 +2724,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   isActive?: boolean
   hireDate?: boolean
+  trainingDueDate?: boolean
+  lastReminderAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   managerId?: boolean
@@ -2010,6 +2737,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   directReports?: boolean | Prisma.User$directReportsArgs<ExtArgs>
   notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
   notificationsCreated?: boolean | Prisma.User$notificationsCreatedArgs<ExtArgs>
+  trainingAssignments?: boolean | Prisma.User$trainingAssignmentsArgs<ExtArgs>
+  assignmentsCreated?: boolean | Prisma.User$assignmentsCreatedArgs<ExtArgs>
+  trainingAccess?: boolean | Prisma.User$trainingAccessArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2029,6 +2759,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   isActive?: boolean
   hireDate?: boolean
+  trainingDueDate?: boolean
+  lastReminderAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   managerId?: boolean
@@ -2051,6 +2783,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   isActive?: boolean
   hireDate?: boolean
+  trainingDueDate?: boolean
+  lastReminderAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   managerId?: boolean
@@ -2073,12 +2807,14 @@ export type UserSelectScalar = {
   role?: boolean
   isActive?: boolean
   hireDate?: boolean
+  trainingDueDate?: boolean
+  lastReminderAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   managerId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "lastName" | "firstName" | "middleName" | "position" | "phone" | "email" | "avatarData" | "avatarMimeType" | "hasAvatar" | "role" | "isActive" | "hireDate" | "createdAt" | "updatedAt" | "managerId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "lastName" | "firstName" | "middleName" | "position" | "phone" | "email" | "avatarData" | "avatarMimeType" | "hasAvatar" | "role" | "isActive" | "hireDate" | "trainingDueDate" | "lastReminderAt" | "createdAt" | "updatedAt" | "managerId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
@@ -2088,6 +2824,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   directReports?: boolean | Prisma.User$directReportsArgs<ExtArgs>
   notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
   notificationsCreated?: boolean | Prisma.User$notificationsCreatedArgs<ExtArgs>
+  trainingAssignments?: boolean | Prisma.User$trainingAssignmentsArgs<ExtArgs>
+  assignmentsCreated?: boolean | Prisma.User$assignmentsCreatedArgs<ExtArgs>
+  trainingAccess?: boolean | Prisma.User$trainingAccessArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2108,6 +2847,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     directReports: Prisma.$UserPayload<ExtArgs>[]
     notificationsReceived: Prisma.$NotificationPayload<ExtArgs>[]
     notificationsCreated: Prisma.$NotificationPayload<ExtArgs>[]
+    trainingAssignments: Prisma.$TrainingAssignmentPayload<ExtArgs>[]
+    assignmentsCreated: Prisma.$TrainingAssignmentPayload<ExtArgs>[]
+    trainingAccess: Prisma.$UserTrainingAccessPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2125,6 +2867,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.Role
     isActive: boolean
     hireDate: Date | null
+    trainingDueDate: Date | null
+    lastReminderAt: Date | null
     createdAt: Date
     updatedAt: Date
     managerId: string | null
@@ -2530,6 +3274,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   directReports<T extends Prisma.User$directReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$directReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notificationsReceived<T extends Prisma.User$notificationsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notificationsCreated<T extends Prisma.User$notificationsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trainingAssignments<T extends Prisma.User$trainingAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trainingAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrainingAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignmentsCreated<T extends Prisma.User$assignmentsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignmentsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrainingAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trainingAccess<T extends Prisma.User$trainingAccessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trainingAccessArgs<ExtArgs>>): Prisma.Prisma__UserTrainingAccessClient<runtime.Types.Result.GetResult<Prisma.$UserTrainingAccessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2574,6 +3321,8 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly hireDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly trainingDueDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lastReminderAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly managerId: Prisma.FieldRef<"User", 'String'>
@@ -3162,6 +3911,73 @@ export type User$notificationsCreatedArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.trainingAssignments
+ */
+export type User$trainingAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrainingAssignment
+   */
+  select?: Prisma.TrainingAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrainingAssignment
+   */
+  omit?: Prisma.TrainingAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrainingAssignmentInclude<ExtArgs> | null
+  where?: Prisma.TrainingAssignmentWhereInput
+  orderBy?: Prisma.TrainingAssignmentOrderByWithRelationInput | Prisma.TrainingAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.TrainingAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrainingAssignmentScalarFieldEnum | Prisma.TrainingAssignmentScalarFieldEnum[]
+}
+
+/**
+ * User.assignmentsCreated
+ */
+export type User$assignmentsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrainingAssignment
+   */
+  select?: Prisma.TrainingAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrainingAssignment
+   */
+  omit?: Prisma.TrainingAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrainingAssignmentInclude<ExtArgs> | null
+  where?: Prisma.TrainingAssignmentWhereInput
+  orderBy?: Prisma.TrainingAssignmentOrderByWithRelationInput | Prisma.TrainingAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.TrainingAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrainingAssignmentScalarFieldEnum | Prisma.TrainingAssignmentScalarFieldEnum[]
+}
+
+/**
+ * User.trainingAccess
+ */
+export type User$trainingAccessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserTrainingAccess
+   */
+  select?: Prisma.UserTrainingAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserTrainingAccess
+   */
+  omit?: Prisma.UserTrainingAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserTrainingAccessInclude<ExtArgs> | null
+  where?: Prisma.UserTrainingAccessWhereInput
 }
 
 /**

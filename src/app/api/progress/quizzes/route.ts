@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { notifyManagerAboutCompletedModule } from "@/lib/notifications";
 import { requirePermission } from "@/lib/permissions";
+import { canAccessTrainingModule, requestTraineeReviewIfReady } from "@/lib/training-access";
 
 const schema = z.object({
   quizId: z.number().int().positive(),
@@ -22,6 +23,9 @@ export async function POST(request: Request) {
     include: { questions: { include: { options: true }, orderBy: { position: "asc" } } },
   });
   if (!quiz) return NextResponse.json({ error: "Тест не найден." }, { status: 404 });
+  if (!await canAccessTrainingModule(user.id, quiz.moduleId)) {
+    return NextResponse.json({ error: "Этот тест пока недоступен. Дождитесь решения руководителя." }, { status: 403 });
+  }
   if (parsed.data.answers.length !== quiz.questions.length) {
     return NextResponse.json({ error: "Нужно ответить на каждый вопрос." }, { status: 400 });
   }
@@ -55,6 +59,7 @@ export async function POST(request: Request) {
     },
   });
 
+  const reviewRequested = attempt.passed ? await requestTraineeReviewIfReady(user.id) : false;
   if (attempt.passed) await notifyManagerAboutCompletedModule(user.id, quiz.moduleId);
 
   return NextResponse.json({
@@ -63,5 +68,6 @@ export async function POST(request: Request) {
     passed: attempt.passed,
     answers: parsed.data.answers,
     completedAt: attempt.completedAt.toISOString(),
+    reviewRequested,
   });
 }

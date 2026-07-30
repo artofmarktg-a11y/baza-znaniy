@@ -36,6 +36,12 @@ export async function GET() {
       moduleTitle: typeof notification.metadata === "object" && notification.metadata && "moduleTitle" in notification.metadata && typeof notification.metadata.moduleTitle === "string"
         ? notification.metadata.moduleTitle
         : "Модуль",
+      message: typeof notification.metadata === "object" && notification.metadata && "message" in notification.metadata && typeof notification.metadata.message === "string"
+        ? notification.metadata.message
+        : "",
+      comment: typeof notification.metadata === "object" && notification.metadata && "comment" in notification.metadata && typeof notification.metadata.comment === "string"
+        ? notification.metadata.comment
+        : "",
     })),
   });
 }

@@ -14,7 +14,7 @@ function createPrismaClient() {
 
 // During `prisma generate` in a running dev server the cached client can be
 // older than the schema. Recreate it once when a newly added model is absent.
-const cachedClientIsCurrent = Boolean(globalForPrisma.prisma?.rolePermission && globalForPrisma.prisma?.loginRateLimit && globalForPrisma.prisma?.notification);
+const cachedClientIsCurrent = Boolean(globalForPrisma.prisma?.rolePermission && globalForPrisma.prisma?.loginRateLimit && globalForPrisma.prisma?.notification && globalForPrisma.prisma?.trainingAssignment);
 export const prisma = cachedClientIsCurrent ? globalForPrisma.prisma! : createPrismaClient();
 
 if (process.env.NODE_ENV !== "production") {

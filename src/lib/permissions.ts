@@ -6,6 +6,7 @@ export const permissions = [
   "training",
   "knowledge_manage",
   "team_progress_view",
+  "training_completion_manage",
   "employees_view",
   "employees_manage",
   "access_manage",

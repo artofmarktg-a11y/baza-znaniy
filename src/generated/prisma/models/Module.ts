@@ -269,6 +269,7 @@ export type ModuleWhereInput = {
   lessons?: Prisma.LessonListRelationFilter
   quiz?: Prisma.XOR<Prisma.QuizNullableScalarRelationFilter, Prisma.QuizWhereInput> | null
   notifications?: Prisma.NotificationListRelationFilter
+  trainingAssignments?: Prisma.TrainingAssignmentListRelationFilter
 }
 
 export type ModuleOrderByWithRelationInput = {
@@ -287,6 +288,7 @@ export type ModuleOrderByWithRelationInput = {
   lessons?: Prisma.LessonOrderByRelationAggregateInput
   quiz?: Prisma.QuizOrderByWithRelationInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  trainingAssignments?: Prisma.TrainingAssignmentOrderByRelationAggregateInput
 }
 
 export type ModuleWhereUniqueInput = Prisma.AtLeast<{
@@ -308,6 +310,7 @@ export type ModuleWhereUniqueInput = Prisma.AtLeast<{
   lessons?: Prisma.LessonListRelationFilter
   quiz?: Prisma.XOR<Prisma.QuizNullableScalarRelationFilter, Prisma.QuizWhereInput> | null
   notifications?: Prisma.NotificationListRelationFilter
+  trainingAssignments?: Prisma.TrainingAssignmentListRelationFilter
 }, "id">
 
 export type ModuleOrderByWithAggregationInput = {
@@ -359,6 +362,7 @@ export type ModuleCreateInput = {
   lessons?: Prisma.LessonCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUncheckedCreateInput = {
@@ -376,6 +380,7 @@ export type ModuleUncheckedCreateInput = {
   lessons?: Prisma.LessonUncheckedCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizUncheckedCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUpdateInput = {
@@ -393,6 +398,7 @@ export type ModuleUpdateInput = {
   lessons?: Prisma.LessonUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateInput = {
@@ -410,6 +416,7 @@ export type ModuleUncheckedUpdateInput = {
   lessons?: Prisma.LessonUncheckedUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUncheckedUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleCreateManyInput = {
@@ -631,6 +638,20 @@ export type ModuleUpdateOneWithoutNotificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ModuleUpdateToOneWithWhereWithoutNotificationsInput, Prisma.ModuleUpdateWithoutNotificationsInput>, Prisma.ModuleUncheckedUpdateWithoutNotificationsInput>
 }
 
+export type ModuleCreateNestedOneWithoutTrainingAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.ModuleCreateWithoutTrainingAssignmentsInput, Prisma.ModuleUncheckedCreateWithoutTrainingAssignmentsInput>
+  connectOrCreate?: Prisma.ModuleCreateOrConnectWithoutTrainingAssignmentsInput
+  connect?: Prisma.ModuleWhereUniqueInput
+}
+
+export type ModuleUpdateOneRequiredWithoutTrainingAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ModuleCreateWithoutTrainingAssignmentsInput, Prisma.ModuleUncheckedCreateWithoutTrainingAssignmentsInput>
+  connectOrCreate?: Prisma.ModuleCreateOrConnectWithoutTrainingAssignmentsInput
+  upsert?: Prisma.ModuleUpsertWithoutTrainingAssignmentsInput
+  connect?: Prisma.ModuleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ModuleUpdateToOneWithWhereWithoutTrainingAssignmentsInput, Prisma.ModuleUpdateWithoutTrainingAssignmentsInput>, Prisma.ModuleUncheckedUpdateWithoutTrainingAssignmentsInput>
+}
+
 export type ModuleCreateWithoutChildrenInput = {
   id: number
   orderNum: number
@@ -645,6 +666,7 @@ export type ModuleCreateWithoutChildrenInput = {
   lessons?: Prisma.LessonCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUncheckedCreateWithoutChildrenInput = {
@@ -661,6 +683,7 @@ export type ModuleUncheckedCreateWithoutChildrenInput = {
   lessons?: Prisma.LessonUncheckedCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizUncheckedCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleCreateOrConnectWithoutChildrenInput = {
@@ -682,6 +705,7 @@ export type ModuleCreateWithoutParentInput = {
   lessons?: Prisma.LessonCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUncheckedCreateWithoutParentInput = {
@@ -698,6 +722,7 @@ export type ModuleUncheckedCreateWithoutParentInput = {
   lessons?: Prisma.LessonUncheckedCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizUncheckedCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleCreateOrConnectWithoutParentInput = {
@@ -735,6 +760,7 @@ export type ModuleUpdateWithoutChildrenInput = {
   lessons?: Prisma.LessonUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateWithoutChildrenInput = {
@@ -751,6 +777,7 @@ export type ModuleUncheckedUpdateWithoutChildrenInput = {
   lessons?: Prisma.LessonUncheckedUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUncheckedUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUpsertWithWhereUniqueWithoutParentInput = {
@@ -799,6 +826,7 @@ export type ModuleCreateWithoutLessonsInput = {
   children?: Prisma.ModuleCreateNestedManyWithoutParentInput
   quiz?: Prisma.QuizCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUncheckedCreateWithoutLessonsInput = {
@@ -815,6 +843,7 @@ export type ModuleUncheckedCreateWithoutLessonsInput = {
   children?: Prisma.ModuleUncheckedCreateNestedManyWithoutParentInput
   quiz?: Prisma.QuizUncheckedCreateNestedOneWithoutModuleInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleCreateOrConnectWithoutLessonsInput = {
@@ -847,6 +876,7 @@ export type ModuleUpdateWithoutLessonsInput = {
   children?: Prisma.ModuleUpdateManyWithoutParentNestedInput
   quiz?: Prisma.QuizUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateWithoutLessonsInput = {
@@ -863,6 +893,7 @@ export type ModuleUncheckedUpdateWithoutLessonsInput = {
   children?: Prisma.ModuleUncheckedUpdateManyWithoutParentNestedInput
   quiz?: Prisma.QuizUncheckedUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleCreateWithoutQuizInput = {
@@ -879,6 +910,7 @@ export type ModuleCreateWithoutQuizInput = {
   children?: Prisma.ModuleCreateNestedManyWithoutParentInput
   lessons?: Prisma.LessonCreateNestedManyWithoutModuleInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUncheckedCreateWithoutQuizInput = {
@@ -895,6 +927,7 @@ export type ModuleUncheckedCreateWithoutQuizInput = {
   children?: Prisma.ModuleUncheckedCreateNestedManyWithoutParentInput
   lessons?: Prisma.LessonUncheckedCreateNestedManyWithoutModuleInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleCreateOrConnectWithoutQuizInput = {
@@ -927,6 +960,7 @@ export type ModuleUpdateWithoutQuizInput = {
   children?: Prisma.ModuleUpdateManyWithoutParentNestedInput
   lessons?: Prisma.LessonUpdateManyWithoutModuleNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateWithoutQuizInput = {
@@ -943,6 +977,7 @@ export type ModuleUncheckedUpdateWithoutQuizInput = {
   children?: Prisma.ModuleUncheckedUpdateManyWithoutParentNestedInput
   lessons?: Prisma.LessonUncheckedUpdateManyWithoutModuleNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleCreateWithoutNotificationsInput = {
@@ -959,6 +994,7 @@ export type ModuleCreateWithoutNotificationsInput = {
   children?: Prisma.ModuleCreateNestedManyWithoutParentInput
   lessons?: Prisma.LessonCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizCreateNestedOneWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleUncheckedCreateWithoutNotificationsInput = {
@@ -975,6 +1011,7 @@ export type ModuleUncheckedCreateWithoutNotificationsInput = {
   children?: Prisma.ModuleUncheckedCreateNestedManyWithoutParentInput
   lessons?: Prisma.LessonUncheckedCreateNestedManyWithoutModuleInput
   quiz?: Prisma.QuizUncheckedCreateNestedOneWithoutModuleInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedCreateNestedManyWithoutModuleInput
 }
 
 export type ModuleCreateOrConnectWithoutNotificationsInput = {
@@ -1007,6 +1044,7 @@ export type ModuleUpdateWithoutNotificationsInput = {
   children?: Prisma.ModuleUpdateManyWithoutParentNestedInput
   lessons?: Prisma.LessonUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUpdateOneWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateWithoutNotificationsInput = {
@@ -1023,6 +1061,91 @@ export type ModuleUncheckedUpdateWithoutNotificationsInput = {
   children?: Prisma.ModuleUncheckedUpdateManyWithoutParentNestedInput
   lessons?: Prisma.LessonUncheckedUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUncheckedUpdateOneWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutModuleNestedInput
+}
+
+export type ModuleCreateWithoutTrainingAssignmentsInput = {
+  id: number
+  orderNum: number
+  title: string
+  description?: string
+  icon?: string
+  gradient?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parent?: Prisma.ModuleCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ModuleCreateNestedManyWithoutParentInput
+  lessons?: Prisma.LessonCreateNestedManyWithoutModuleInput
+  quiz?: Prisma.QuizCreateNestedOneWithoutModuleInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutModuleInput
+}
+
+export type ModuleUncheckedCreateWithoutTrainingAssignmentsInput = {
+  id: number
+  orderNum: number
+  title: string
+  description?: string
+  icon?: string
+  gradient?: string
+  isActive?: boolean
+  parentId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.ModuleUncheckedCreateNestedManyWithoutParentInput
+  lessons?: Prisma.LessonUncheckedCreateNestedManyWithoutModuleInput
+  quiz?: Prisma.QuizUncheckedCreateNestedOneWithoutModuleInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutModuleInput
+}
+
+export type ModuleCreateOrConnectWithoutTrainingAssignmentsInput = {
+  where: Prisma.ModuleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ModuleCreateWithoutTrainingAssignmentsInput, Prisma.ModuleUncheckedCreateWithoutTrainingAssignmentsInput>
+}
+
+export type ModuleUpsertWithoutTrainingAssignmentsInput = {
+  update: Prisma.XOR<Prisma.ModuleUpdateWithoutTrainingAssignmentsInput, Prisma.ModuleUncheckedUpdateWithoutTrainingAssignmentsInput>
+  create: Prisma.XOR<Prisma.ModuleCreateWithoutTrainingAssignmentsInput, Prisma.ModuleUncheckedCreateWithoutTrainingAssignmentsInput>
+  where?: Prisma.ModuleWhereInput
+}
+
+export type ModuleUpdateToOneWithWhereWithoutTrainingAssignmentsInput = {
+  where?: Prisma.ModuleWhereInput
+  data: Prisma.XOR<Prisma.ModuleUpdateWithoutTrainingAssignmentsInput, Prisma.ModuleUncheckedUpdateWithoutTrainingAssignmentsInput>
+}
+
+export type ModuleUpdateWithoutTrainingAssignmentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+  gradient?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.ModuleUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ModuleUpdateManyWithoutParentNestedInput
+  lessons?: Prisma.LessonUpdateManyWithoutModuleNestedInput
+  quiz?: Prisma.QuizUpdateOneWithoutModuleNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutModuleNestedInput
+}
+
+export type ModuleUncheckedUpdateWithoutTrainingAssignmentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+  gradient?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.ModuleUncheckedUpdateManyWithoutParentNestedInput
+  lessons?: Prisma.LessonUncheckedUpdateManyWithoutModuleNestedInput
+  quiz?: Prisma.QuizUncheckedUpdateOneWithoutModuleNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleCreateManyParentInput = {
@@ -1051,6 +1174,7 @@ export type ModuleUpdateWithoutParentInput = {
   lessons?: Prisma.LessonUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateWithoutParentInput = {
@@ -1067,6 +1191,7 @@ export type ModuleUncheckedUpdateWithoutParentInput = {
   lessons?: Prisma.LessonUncheckedUpdateManyWithoutModuleNestedInput
   quiz?: Prisma.QuizUncheckedUpdateOneWithoutModuleNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutModuleNestedInput
+  trainingAssignments?: Prisma.TrainingAssignmentUncheckedUpdateManyWithoutModuleNestedInput
 }
 
 export type ModuleUncheckedUpdateManyWithoutParentInput = {
@@ -1090,12 +1215,14 @@ export type ModuleCountOutputType = {
   children: number
   lessons: number
   notifications: number
+  trainingAssignments: number
 }
 
 export type ModuleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   children?: boolean | ModuleCountOutputTypeCountChildrenArgs
   lessons?: boolean | ModuleCountOutputTypeCountLessonsArgs
   notifications?: boolean | ModuleCountOutputTypeCountNotificationsArgs
+  trainingAssignments?: boolean | ModuleCountOutputTypeCountTrainingAssignmentsArgs
 }
 
 /**
@@ -1129,6 +1256,13 @@ export type ModuleCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.
   where?: Prisma.NotificationWhereInput
 }
 
+/**
+ * ModuleCountOutputType without action
+ */
+export type ModuleCountOutputTypeCountTrainingAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrainingAssignmentWhereInput
+}
+
 
 export type ModuleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1146,6 +1280,7 @@ export type ModuleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   lessons?: boolean | Prisma.Module$lessonsArgs<ExtArgs>
   quiz?: boolean | Prisma.Module$quizArgs<ExtArgs>
   notifications?: boolean | Prisma.Module$notificationsArgs<ExtArgs>
+  trainingAssignments?: boolean | Prisma.Module$trainingAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.ModuleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["module"]>
 
@@ -1197,6 +1332,7 @@ export type ModuleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   lessons?: boolean | Prisma.Module$lessonsArgs<ExtArgs>
   quiz?: boolean | Prisma.Module$quizArgs<ExtArgs>
   notifications?: boolean | Prisma.Module$notificationsArgs<ExtArgs>
+  trainingAssignments?: boolean | Prisma.Module$trainingAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.ModuleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ModuleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1214,6 +1350,7 @@ export type $ModulePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     lessons: Prisma.$LessonPayload<ExtArgs>[]
     quiz: Prisma.$QuizPayload<ExtArgs> | null
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    trainingAssignments: Prisma.$TrainingAssignmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1625,6 +1762,7 @@ export interface Prisma__ModuleClient<T, Null = never, ExtArgs extends runtime.T
   lessons<T extends Prisma.Module$lessonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Module$lessonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quiz<T extends Prisma.Module$quizArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Module$quizArgs<ExtArgs>>): Prisma.Prisma__QuizClient<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   notifications<T extends Prisma.Module$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Module$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trainingAssignments<T extends Prisma.Module$trainingAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Module$trainingAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrainingAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2172,6 +2310,30 @@ export type Module$notificationsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * Module.trainingAssignments
+ */
+export type Module$trainingAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrainingAssignment
+   */
+  select?: Prisma.TrainingAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrainingAssignment
+   */
+  omit?: Prisma.TrainingAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrainingAssignmentInclude<ExtArgs> | null
+  where?: Prisma.TrainingAssignmentWhereInput
+  orderBy?: Prisma.TrainingAssignmentOrderByWithRelationInput | Prisma.TrainingAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.TrainingAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrainingAssignmentScalarFieldEnum | Prisma.TrainingAssignmentScalarFieldEnum[]
 }
 
 /**
